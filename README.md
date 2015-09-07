@@ -2,5 +2,5 @@
 ## Rahul Bhonsale
 ## Hunter Horton (AKA mr programming man)
 ## David Oliveira
-## Testing changed by Wang.
+## Kaixiang Wang
 ## Ryan Conwell
