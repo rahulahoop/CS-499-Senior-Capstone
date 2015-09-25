@@ -21,5 +21,22 @@ function create(){
 }
 
 function update(){
-    
+//    if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+//        pacman.x -= 4;
+//        //pacman.scale.x = -0.1;
+//        pacman.rotation = -3;
+//    }
+//    if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+//        pacman.x += 4;
+//        //pacman.scale.x = 0.1;
+//        pacman.rotation = 0;
+//    }
+//    if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+//        pacman.y += 4;
+//        pacman.rotation = 1.5;
+//    }
+//    if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
+//        pacman.y -= 4;
+//        pacman.rotation = -1.5
+//    }
 }
