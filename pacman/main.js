@@ -1,9 +1,9 @@
-var game;
+var Game; 
 
-game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+Game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
-game.state.add('Menu', Menu);
+Game.state.add('Menu', Menu);
 
-game.state.add('Game', Game);
+Game.state.add('game', game);
 
-game.state.start('Menu');
+Game.state.start('Menu');
