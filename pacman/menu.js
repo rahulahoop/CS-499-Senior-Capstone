@@ -5,9 +5,9 @@ var Menu = {
         // The first argument is how our image will be refered to, 
         // the second one is the path to our file.
         Game.load.image('menu','./images/purple gradient.png');
-        Game.load.spritesheet('playGame','./images/menu/playGame.png');
-        Game.load.spritesheet('highScores','./images/menu/highScores.png');
-        Game.load.spritesheet('exitGame','./images/menu/exitGame.png');
+        Game.load.spritesheet('playGame','./images/menu/playgame.png');
+        Game.load.spritesheet('highScores','./images/menu/highscores.png');
+        Game.load.spritesheet('exitGame','./images/menu/exitgame.png');
     },
 
     create: function (){
