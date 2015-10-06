@@ -84,12 +84,12 @@ update : function() {
     game.physics.arcade.overlap(pacman, walls, collide);
 
     // Teleport to from the right to left side
-    if (pacman.x > 450 && pacman.y > 304)
+    if (pacman.x > 450 && pacman.y > 280)
     {
         pacman.x = 40;
     }
     // Teleport from left to right side
-    if (pacman.x < 40 && pacman.y > 304)
+    if (pacman.x < 40 && pacman.y > 280)
     {
         pacman.x = 450;
     }
