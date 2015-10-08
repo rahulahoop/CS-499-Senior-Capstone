@@ -20,7 +20,6 @@ var Menu = {
         dudes.anchor.setTo(0.5, 0.5);
         
         // Add buttons - Play Game, High Scores, Quit Game 
-        // All of them have the same function right now - start the game
         // Scaled to original size, but we can resize them
         
         playGame = Game.add.button(300,230, 'playGame', this.startGame, this);
@@ -35,12 +34,11 @@ var Menu = {
     },
     
     startGame: function(){
-    
         this.state.start('game');
 },
     exitGame: function(){
         Game.destroy();
-        window.location.href = "http://www.youtube.com/watch?v=WnaJCd2HiH0";
+        window.location.href = "http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1";
 }
 
 };
