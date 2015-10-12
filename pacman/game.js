@@ -99,6 +99,9 @@ update : function() {
         pacman.rotation = -1.5
         pacman.animations.play('waka');
     }
+    else if(game.input.keyboard.isDown(Phaser.Keyboard.ESC)){
+        Game.paused = true;
+    }
     else
     {
 //        console.log("X" + pacman.x);
