@@ -1,7 +1,9 @@
 // Global Vars.
 var pacman;
 var wall;
-
+var map;
+var layer;
+var layer2;
 // Game Setup.
 var game =  {
 
@@ -12,47 +14,28 @@ preload : function(){
     game.load.image('map', 'images/map.png');
     game.load.spritesheet('dot', 'images/dots.png', 124, 124, 4);
     
-    //map images
-    game.load.image('mapblock', 'images/mapblock.png');
-    game.load.image('mapghostpen', 'images/mapghostpen.png');
-    game.load.image('mapprong', 'images/mapprong.png');
-    game.load.image('mapprongbase', 'images/mapprongbase.png');
-    game.load.image('maproundblocksmall', 'images/maproundblocksmall.png');
-    game.load.image('skinnyprongbaseleft', 'images/mapskinnyprongbaseleft.png');
-    game.load.image('skinnyprongleft', 'images/mapskinnyprongleft.png');
-    game.load.image('skinnyprongbaseright', 'images/mapskinnyprongbaseright.png');
-    game.load.image('skinnyprongright', 'images/mapskinnyprongright.png');
-    game.load.image('ltopleft', 'images/ltopleft.png');
-    game.load.image('lbottomleft', 'images/lbottomleft.png');
-    game.load.image('ltopright', 'images/ltopright.png');
-    game.load.image('lbottomright', 'images/lbottomright.png');
-    game.load.image('maphorizbar', 'images/maphorizbar.png');
-    game.load.image('mapvertbar', 'images/mapvertbar.png');
-    game.load.image('bottomleftbase', 'images/mapbottomleftbase.png');
-    game.load.image('bottomleftprong', 'images/mapbottomleftprong.png');
-    game.load.image('bottomrightbase', 'images/mapbottomrightbase.png');
-    game.load.image('bottomrightprong', 'images/mapbottomrightprong.png');
-    game.load.image('topleft', 'images/maptopleft.png');
-    game.load.image('bottomleft', 'images/mapbottomleft.png');
-    game.load.image('bottomright', 'images/mapbottomright.png');
-    game.load.image('topright', 'images/maptopright.png');  
-    game.load.image('top', 'images/maptop.png');
-    game.load.image('bottom', 'images/mapbottom.png');
-    game.load.image('bottomleftsquare', 'images/mapbottomleftsquare.png');
-    game.load.image('topleftsquare', 'images/maptopleftsquare.png');
-    game.load.image('bottomrightsquare', 'images/maptoprightsquare.png');
-    game.load.image('toprightsquare', 'images/maptoprightsquare.png'); 
-    game.load.image('topprong', 'images/maptopprong.png');
-    game.load.image('leftloop', 'images/mapleftloop.png');
-    game.load.image('rightloop', 'images/maprightloop.png');
+    game.load.tilemap('tiledMap', 'images/map/testmap_map.csv',null,Phaser.Tilemap.CSV);
+    game.load.tilemap('tiledDots', 'images/map/testmap_dots.csv',Phaser.Tilemap.CSV);
+    game.load.image('tiles','images/map/tiles.png');
+    
 },
 
 create : function() {
     
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+    map = game.add.tilemap('tiledMap',32,32);
+    dots = game.add.tilemap('tiledDots',32,32);
+    map.addTilesetImage('tiles');
+    dots.addTilesetImage('tiles');
+    layer = map.createLayer(0);
+    layer2 = dots.createLayer(0)
+    layer.resizeWorld();
     
-    map = game.add.sprite(40,40,'map');
-    map.scale.setTo(2.5,2.5);
+    map.setCollision([-1],true,layer,false);
+    
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+        
+   // map = game.add.sprite(40,40,'map');
+    //map.scale.setTo(2.5,2.5);
     
     // Add pacman sprite, scale, and add anchor.
     pacman = game.add.sprite(game.world.center,4,"pacman");
@@ -67,31 +50,32 @@ create : function() {
     var death = pacman.animations.add('death');
     var waka = pacman.animations.add('waka',[0,2,4,2],15,true);
     
+    
     //Add walls
-    createWalls();
-    
-    dot = game.add.sprite(0,0,'dot');
-    
+    //createWalls();
+        
     
     // Add other sprites to physics list.
-    game.physics.enable([pacman], Phaser.Physics.ARCADE);
-    game.physics.enable(walls, Phaser.Physics.ARCADE);
+    game.physics.arcade.enable(pacman);
+
+
+    //game.physics.enable(walls, Phaser.Physics.ARCADE);
     
 },
 
 update : function() {    
     
-    game.physics.arcade.overlap(pacman, walls, collide);
-
+    //game.physics.arcade.overlap(pacman, walls, collide);
+    game.physics.arcade.collide(pacman, layer2);
     // Teleport to from the right to left side
-    if (pacman.x > 450 && pacman.y > 280)
+    if (pacman.x > 517 && pacman.y > 260)
     {
-        pacman.x = 40;
+        pacman.x = 110;
     }
     // Teleport from left to right side
-    if (pacman.x < 40 && pacman.y > 280)
+    if (pacman.x < 110 && pacman.y > 260)
     {
-        pacman.x = 450;
+        pacman.x = 512;
     }
     
     // Movement Keys.
@@ -117,7 +101,8 @@ update : function() {
     }
     else
     {
-        //pacman.animations.stop();
+//        console.log("X" + pacman.x);
+//        console.log("Y" + pacman.y);
     }
     
     
