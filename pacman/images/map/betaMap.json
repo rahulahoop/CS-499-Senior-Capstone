@@ -1,0 +1,44 @@
+{ "height":100,
+ "layers":[
+        {
+         "compression":"zlib",
+         "data":"eJzt17sKAjEQBdCIhQ9sLNTC\/\/9PXWQwLAsbi9EBz4E04S6EDEl2WqOqzXMcPhzbn6z0P5y\/9A1jYm9PA9nIqEce56OW2NvrQDYy6pHH+ajl0t7\/TWsid0tdEdTR9x+T3UIm5vQf+eZvwX0hM5\/zfuTxntfS7+2+ve6j48qceuRxPmpRj1r6\/mN06D8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKCOB2\/FA5M=",
+         "encoding":"base64",
+         "height":100,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":100,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "renderorder":"right-down",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"tiles.png",
+         "imageheight":96,
+         "imagewidth":320,
+         "margin":0,
+         "name":"pacmap",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":30,
+         "tileheight":32,
+         "tilewidth":32
+        }],
+ "tilewidth":32,
+ "version":1,
+ "width":100
+}
