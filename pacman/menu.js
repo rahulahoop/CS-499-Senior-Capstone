@@ -25,7 +25,7 @@ var Menu = {
         playGame = Game.add.button(300,230, 'playGame', this.startGame, this);
         playGame.scale.setTo(1,1);
         
-        highScores = Game.add.button(300,325, 'highScores', this.startGame, this);
+        highScores = Game.add.button(300,325, 'highScores', this.hightScores, this);
         highScores.scale.setTo(1,1);
         
         exitGame = Game.add.button(300,420, 'exitGame', this.exitGame, this);
@@ -39,6 +39,10 @@ var Menu = {
     exitGame: function(){
         Game.destroy();
         window.location.href = "http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1";
-}
+},
+    hightScores: function(){
+        this.state.start('ScoreMenu');
+        //Game.add.text(500,350, ' Under Construction', {font: '35px Comic Sans', fill: '#f00'});
+    }
 
 };
