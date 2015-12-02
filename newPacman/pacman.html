@@ -110,7 +110,7 @@
 
                 this.load.image('dot', 'assets/dot.png');
                 this.load.image('tiles', 'assets/pacman-tiles.png');
-                this.load.spritesheet('pacman', 'images/PacMenSmaller.png', 31.8,31.8, 12);
+                this.load.spritesheet('pacman', 'images/PacMenSmaller.png', 31.8, 31.8, 12);
                 this.load.spritesheet('clyde', 'images/ghosts/clyde.png', 255, 255, 12);
                 this.load.spritesheet('blinky', 'images/ghosts/blinky.png', 255, 255, 12);
                 this.load.spritesheet('inky', 'images/ghosts/inky.png', 255, 255, 12);
@@ -149,9 +149,13 @@
                 this.blinky.scale.setTo(.07);
                 this.pinky = this.add.sprite((14 * 16) + 8, (13 * 16) + 8, 'pinky', 0);
                 this.pinky.scale.setTo(.07);
-                this.pacman.anchor.setTo(0.5,0.5);
+                this.pacman.anchor.setTo(0.5, 0.5);
                 this.pacman.animations.add('munch', [0, 2, 4, 2], 20, true);
                 this.physics.arcade.enable(this.pacman);
+                this.physics.arcade.enable(this.clyde);
+                this.physics.arcade.enable(this.inky);
+                this.physics.arcade.enable(this.blinky);
+                this.physics.arcade.enable(this.pinky);
                 this.pacman.body.setSize(16, 16, 0, 0);
 
                 this.cursors = this.input.keyboard.createCursorKeys();
@@ -263,18 +267,25 @@
             },
 
             update: function () {
-                if(this.pacman.body.velocity.x == 0 && this.pacman.body.velocity.y == 0){
-                    this.pacman.animations.stop();
-                }
-                else{
-                    this.pacman.animations.play('munch');
-                }
-
                 this.physics.arcade.collide(this.pacman, this.layer);
+                this.physics.arcade.collide(this.pacman, this.blinky);
+                this.physics.arcade.collide(this.pacman, this.inky);
+                this.physics.arcade.collide(this.pacman, this.pinky);
+                this.physics.arcade.collide(this.pacman, this.clyde);
+                this.physics.arcade.collide(this.layer, this.blinky);
+                this.physics.arcade.collide(this.layer, this.inky);
+                this.physics.arcade.collide(this.layer, this.pinky);
+                this.physics.arcade.collide(this.layer, this.clyde);
                 this.physics.arcade.overlap(this.pacman, this.dots, this.eatDot, null, this);
-
+                this.clyde.body.velocity.x = Math.floor(Math.random() * 100);
+                this.clyde.body.velocity.y = Math.floor(Math.random() * 100);
                 this.marker.x = this.math.snapToFloor(Math.floor(this.pacman.x), this.gridsize) / this.gridsize;
                 this.marker.y = this.math.snapToFloor(Math.floor(this.pacman.y), this.gridsize) / this.gridsize;
+                if (this.pacman.body.velocity.x == 0 && this.pacman.body.velocity.y == 0) {
+                    this.pacman.animations.stop();
+                } else {
+                    this.pacman.animations.play('munch');
+                }
 
                 //  Update our grid sensors
                 this.directions[1] = this.map.getTileLeft(this.layer.index, this.marker.x, this.marker.y);
