@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/EasyStarJS" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="7h0TbWawFK.EasyStarJS" package="7h0TbWawFK" required_version="2.3"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>EasyStarJS</name>
+    <tizen:profile name="mobile"/>
+</widget>
