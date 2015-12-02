@@ -1,53 +1,75 @@
 // Global Vars.
-var pacman;
-var wall;
-var map;
-var layer;
-var layer2;
+
 // Game Setup.
-var game =  {
+var Pacman = function (Game) {
 
+        this.map = null;
+        this.layer = null;
+        this.pacman = null;
 
-preload : function(){
+        this.safetile = 14;
+        this.gridsize = 16;
+
+        this.speed = 150;
+        this.threshold = 3;
+
+        this.marker = new Phaser.Point();
+        this.turnPoint = new Phaser.Point();
+
+        this.directions = [ null, null, null, null, null ];
+        this.opposites = [ Phaser.NONE, Phaser.RIGHT, Phaser.LEFT, Phaser.DOWN, Phaser.UP ];
+
+        this.current = Phaser.NONE;
+        this.turning = Phaser.NONE;
+
+    };
+
+Pacman.prototype =  {
+
+init: function () {
     
-    game.load.spritesheet('pacman', 'images/PacMen.png', 255, 255,12);
+    this.physics.startSystem(Phaser.Physics.ARCADE);
+
+},
     
-    //game.load.tilemap('tiledMap', 'images/map/testmap_map.csv',null,Phaser.Tilemap.CSV);
-    game.load.tilemap('tiledDots', 'images/map/testmap_dots.csv',Phaser.Tilemap.CSV);
-    game.load.image('tiles','images/map/tiles.png');
+preload: function(){
+    
+    this.load.image('dot', 'images/dot.png');
+    this.load.spritesheet('pacman', 'images/PacMen.png', 255, 255,12);
+    this.load.image('tiles','images/map/pacman-tiles.png');
+    this.load.tilemap('tiledMap', 'images/map/pacman-map.json',null,Phaser.Tilemap.TILED_JSON);
     
 },
 
-create : function() {
-
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //map = game.add.tilemap('map',32,32);
-    dots = game.add.tilemap('tiledDots',32,32);
-    //map.addTilesetImage('tiles');
-    dots.addTilesetImage('tiles');
-    //layer = map.createLayer("layer");
-    layer2 = dots.createLayer(0);
-    layer2.resizeWorld();
+create: function() {
     
-    dots.setCollision([29], false, layer2, false);
-        
-    // Add pacman sprite, scale, and add anchor.
-    pacman = game.add.sprite(game.world.center,4,"pacman");
-    pacman.scale.setTo(.08,.08);
-    pacman.anchor.setTo(.5,.5);
+    this.map = this.add.tilemap('tiledMap');
+    this.map.addTilesetImage('pacman-tiles','tiles');
+    
+    this.layer = this.map.createLayer("Pacman");
+    this.layer.debug = true;
+    this.dots = this.add.physicsGroup();
+    
+    this.map.createFromTiles(7, 14, 'dot', layer, dots);
+    
+    this.dots.setAll('x', 6, false, false, 1);
+    this.dots.setAll('y', 6, false, false, 1);
 
-    // Pacman Position
-    pacman.x = 256
-    pacman.y = 344
+    
+    this.map.setCollisionByExclusion([14],true,layer);
+
+    // Add pacman sprite, scale, and add anchor.
+    this.pacman = this.add.sprite((14 * 16) + 8, (17 * 16) + 8, 'pacman', 0);
+    this.pacman.scale.setTo(.08,.08);
+    this.pacman.anchor.set(.5);
     
     //Various animations.
-    var death = pacman.animations.add('death');
-    var waka = pacman.animations.add('waka',[0,2,4,2],15,true);
+    var death = this.pacman.animations.add('death');
+    var waka = this.pacman.animations.add('waka',[0,2,4,2],15,true);
         
     
     // Add other sprites to physics list.
-    game.physics.arcade.enable([pacman,dots]);
+    this.physics.enable(this.pacman);
 
 
     //game.physics.enable(walls, Phaser.Physics.ARCADE);
@@ -56,18 +78,7 @@ create : function() {
 
 update : function() {    
     
-    game.physics.arcade.collide(pacman,layer2);
-    
-    // Teleport to from the right to left side
-    if (pacman.x > 517 && pacman.y > 260)
-    {
-        pacman.x = 110;
-    }
-    // Teleport from left to right side
-    if (pacman.x < 110 && pacman.y > 260)
-    {
-        pacman.x = 512;
-    }
+    this.physics.arcade.collide(this.pacman,this.layer);
     
     // Movement Keys.
     if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
@@ -104,31 +115,5 @@ update : function() {
 
 };
 
-function collide(pacman, wall){ 
-        
-    /*if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){      
-        pacman.x += 6;
-    }
-    else if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-        pacman.x -= 6;
-    }
-    else if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
-        pacman.y -= 6;
-    }
-    else if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
-        pacman.y += 6;
-    }*/
-    if(pacman.x > wall.x){
-        pacman.x += 3;    
-    }
-    if(pacman.x < wall.x){
-        pacman.x -= 3;        
-    }
-    if(pacman.y > wall.y){
-        pacman.y += 3;
-    }
-    if(pacman.y < wall.y){
-        pacman.y -= 3;
-    }
     
-}
+
