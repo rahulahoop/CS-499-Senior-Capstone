@@ -142,13 +142,13 @@
                 //  Position Pacman at grid location 14x17 (the +8 accounts for his anchor)
                 this.pacman = this.add.sprite((14 * 16) + 8, (17 * 16) + 8, 'pacman', 0);
                 this.clyde = this.add.sprite((14 * 16) + 8, (14 * 16) + 8, 'clyde', 0);
-                this.clyde.scale.setTo(.08);
-                this.inky = this.add.sprite((13 * 16) + 8, (14 * 16) + 8, 'inky', 0);
-                this.inky.scale.setTo(.08);
-                this.blinky = this.add.sprite((12 * 16) + 8, (14 * 16) + 8, 'blinky', 0);
-                this.blinky.scale.setTo(.08);
-                this.pinky = this.add.sprite((11 * 16) + 8, (14 * 16) + 8, 'pinky', 0);
-                this.pinky.scale.setTo(.08);
+                this.clyde.scale.setTo(.07);
+                this.inky = this.add.sprite((12 * 16) + 8, (14 * 16) + 8, 'inky', 0);
+                this.inky.scale.setTo(.07);
+                this.blinky = this.add.sprite((12 * 16) + 8, (13 * 16) + 8, 'blinky', 0);
+                this.blinky.scale.setTo(.07);
+                this.pinky = this.add.sprite((14 * 16) + 8, (13 * 16) + 8, 'pinky', 0);
+                this.pinky.scale.setTo(.07);
                 this.pacman.anchor.setTo(0.5,0.5);
                 this.pacman.animations.add('munch', [0, 2, 4, 2], 20, true);
                 this.physics.arcade.enable(this.pacman);
@@ -263,6 +263,12 @@
             },
 
             update: function () {
+                if(this.pacman.body.velocity.x == 0 && this.pacman.body.velocity.y == 0){
+                    this.pacman.animations.stop();
+                }
+                else{
+                    this.pacman.animations.play('munch');
+                }
 
                 this.physics.arcade.collide(this.pacman, this.layer);
                 this.physics.arcade.overlap(this.pacman, this.dots, this.eatDot, null, this);
