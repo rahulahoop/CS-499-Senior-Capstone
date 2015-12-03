@@ -326,8 +326,14 @@
                     this.dots.callAll('revive');
                 }
                 
-                console.log(this.dots.total);
-
+            },
+            
+            ghostCollide: function(pacman, ghost) {
+                
+                this.game.paused = true;
+                console.log('here');
+                this.gameOver = this.add.text(250, 250, "  Game Over! \n Reload game!", {font: '30px Comic Sans', fill: '#fff'});
+                this.gameOver.anchor.setTo(0.5, 0.5);
             },
 
             update: function () {
@@ -337,7 +343,11 @@
                 this.physics.arcade.collide(this.layer, this.pinky);
                 this.physics.arcade.collide(this.layer, this.clyde);
                 this.physics.arcade.overlap(this.pacman, this.dots, this.eatDot, null, this);
-                this.physics.arcade.overlap(this.pacman, this.ghosts, this.ghostCollide, null, this);
+                this.physics.arcade.overlap(this.pacman, this.clyde, this.ghostCollide, null, this);
+                this.physics.arcade.overlap(this.pacman, this.pinky, this.ghostCollide, null, this);
+                this.physics.arcade.overlap(this.pacman, this.inky, this.ghostCollide, null, this);
+                this.physics.arcade.overlap(this.pacman, this.blinky, this.ghostCollide, null, this);
+
                 //this.clyde.body.velocity.x = Math.floor(Math.random() * 100);
                 //this.clyde.body.velocity.y = Math.floor(Math.random() * 100);
 
