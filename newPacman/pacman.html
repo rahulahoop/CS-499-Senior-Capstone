@@ -35,7 +35,7 @@
                 this.menu.anchor.setTo(.5, .5);
 
                 // Add Duders Pacman to background
-                this.dudes = this.add.text(230, 150, 'Duders Pacman', {
+                this.dudes = this.add.text(225, 150, 'Duders Pacman', {
                     font: '65px Comic Sans',
                     fill: '#ffa'
                 });
@@ -44,10 +44,10 @@
                 // Add buttons - Play Game & Quit Game 
                 // Scaled to original size, but we can resize them
 
-                this.playGame = this.add.button(150, 230, 'playGame', this.startGame, this);
+                this.playGame = this.add.button(120, 230, 'playGame', this.startGame, this);
                 this.playGame.scale.setTo(1, 1);
 
-                this.exitGame = this.add.button(150, 350, 'exitGame', this.exitGame, this);
+                this.exitGame = this.add.button(120, 350, 'exitGame', this.exitGame, this);
                 this.exitGame.scale.setTo(1, 1);
 
             },
@@ -77,6 +77,7 @@
             this.blinky = null;
             this.safetile = 14;
             this.gridsize = 16;
+			this.score = 0;
 
             this.speed = 150;
             this.threshold = 3;
@@ -169,6 +170,13 @@
 
                 this.pacman.play('munch');
                 this.move(Phaser.LEFT);
+				
+				// Display score
+                this.displayscore = this.add.text(40, 188, 'Score: \n' + this.score, {
+                    font: '23px Comic Sans',
+                    fill: '#ffa'
+                });
+                this.displayscore.anchor.setTo(0.5, 0.5);
 
             },
 
@@ -360,6 +368,8 @@
                 if (this.turning !== Phaser.NONE) {
                     this.turn();
                 }
+				
+				this.displayscore.setText('Score: \n' + this.score);
 
             }
 
