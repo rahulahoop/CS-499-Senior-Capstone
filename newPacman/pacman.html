@@ -300,20 +300,19 @@
                 if (this.dots.total === 0) {
                     this.dots.callAll('revive');
                 }
+                
+                console.log(this.dots.total);
 
             },
 
             update: function () {
                 this.physics.arcade.collide(this.pacman, this.layer);
-                this.physics.arcade.collide(this.pacman, this.blinky);
-                this.physics.arcade.collide(this.pacman, this.inky);
-                this.physics.arcade.collide(this.pacman, this.pinky);
-                this.physics.arcade.collide(this.pacman, this.clyde);
                 this.physics.arcade.collide(this.layer, this.blinky);
                 this.physics.arcade.collide(this.layer, this.inky);
                 this.physics.arcade.collide(this.layer, this.pinky);
                 this.physics.arcade.collide(this.layer, this.clyde);
                 this.physics.arcade.overlap(this.pacman, this.dots, this.eatDot, null, this);
+                this.physics.arcade.overlap(this.pacman, this.ghosts, this.ghostCollide, null, this);
                 //this.clyde.body.velocity.x = Math.floor(Math.random() * 100);
                 //this.clyde.body.velocity.y = Math.floor(Math.random() * 100);
                                 
