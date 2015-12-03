@@ -125,7 +125,7 @@
 
                 this.map = this.add.tilemap('map');
                 this.map.addTilesetImage('pacman-tiles', 'tiles');
-
+                this.map.debug = true;
                 this.layer = this.map.createLayer('Pacman');
                 this.dots = this.add.physicsGroup();
                 this.ghosts = this.add.physicsGroup();
@@ -138,16 +138,15 @@
                 //  Pacman should collide with everything except the safe tile
                 this.map.setCollisionByExclusion([this.safetile], true, this.layer);
 
-                //  Position Pacman at grid location 14x17 (the +8 accounts for his anchor)
                 this.pacman = this.add.sprite((14 * 16) + 8, (17 * 16) + 8, 'pacman', 0);
                 this.clyde = this.add.sprite((2 * 16) + 8, (2 * 16) + 8, 'clyde', 0);
                 this.clyde.scale.setTo(.1);
                 this.clyde.anchor.setTo(0.5, 0.5);
                 this.inky = this.add.sprite((2 * 16) + 8, (28 * 16) + 8, 'inky', 0);
                 this.inky.scale.setTo(.1);
-                this.blinky = this.add.sprite((18 * 16) + 8, (13 * 16) + 8, 'blinky', 0);
+                this.blinky = this.add.sprite((25 * 16) + 8, (2 * 16) + 8, 'blinky', 0);
                 this.blinky.scale.setTo(.1);
-                this.pinky = this.add.sprite((20 * 16) + 8, (13 * 16) + 8, 'pinky', 0);
+                this.pinky = this.add.sprite((25 * 16) + 8, (28 * 16) + 8, 'pinky', 0);
                 this.pinky.scale.setTo(.1);
                 this.pacman.anchor.setTo(0.5, 0.5);
                 this.clyde.anchor.setTo(0.5, 0.5);
@@ -220,33 +219,31 @@
                 this.wallcheck = this.clyde.body.onWall();
                 this.floorcheck = this.clyde.body.onFloor();
 
-
                 if (this.clyde.body.velocity.x === 0 && this.clyde.body.velocity.y === 0) {
                     if (Math.random() < .5) {
-                        this.clyde.body.velocity.x = 70 * posorneg;
+                        this.clyde.body.velocity.x = 85 * posorneg;
                         this.clyde.body.velocity.y = 0;
                     } else {
-                        this.clyde.body.velocity.y = 70 * posorneg;
+                        this.clyde.body.velocity.y = 85 * posorneg;
                         this.clyde.body.velocity.x = 0;
                     }
                 }
-
                 if (this.inky.body.velocity.x === 0 && this.inky.body.velocity.y === 0) {
                     if (Math.random() < .5) {
-                        this.inky.body.velocity.x = 70 * posorneg;
+                        this.inky.body.velocity.x = 80 * posorneg;
                         this.inky.body.velocity.y = 0;
                     } else {
-                        this.inky.body.velocity.y = 70 * posorneg;
+                        this.inky.body.velocity.y = 80 * posorneg;
                         this.inky.body.velocity.x = 0;
                     }
                 }
 
                 if (this.blinky.body.velocity.x === 0 && this.blinky.body.velocity.y === 0) {
                     if (Math.random() < .5) {
-                        this.blinky.body.velocity.x = 70 * posorneg;
+                        this.blinky.body.velocity.x = 75 * posorneg;
                         this.blinky.body.velocity.y = 0;
                     } else {
-                        this.blinky.body.velocity.y = 70 * posorneg;
+                        this.blinky.body.velocity.y = 75 * posorneg;
                         this.blinky.body.velocity.x = 0;
                     }
                 }
