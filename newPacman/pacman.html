@@ -79,7 +79,7 @@
             this.gridsize = 16;
             this.speed = 150;
             this.threshold = 3;
-
+            this.score = 0;
             this.marker = new Phaser.Point();
             this.turnPoint = new Phaser.Point();
 
@@ -328,6 +328,8 @@
                 if (this.dots.total === 0) {
                     this.dots.callAll('revive');
                 }
+                
+                this.score = this.score + 1;
                 
             },
             
